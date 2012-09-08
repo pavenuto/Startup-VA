@@ -99,16 +99,33 @@ textarea {
   border-left: 1px solid #ccc;
   position: relative;
 }
-#panel h1 {
+#panel .masthead {
   color: #f7f7f7;
   background: #222;
   margin: 0;
   padding: 8px 15px;
+}
+#panel h1 {
   font-size: 21px;
   font-family: "proxima-nova";
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+}
+#panel .add {
+  color: rgba(244, 244, 244, 0.8);
+  border-radius: 18px;
+  float: right;
+  padding: 4px 16px;
+  font-size: 15px;
+  text-decoration: none;
+  border: 1px solid rgba(244, 244, 244, 0.3);
+}
+#panel .add:hover {
+  border: 1px solid rgba(244, 244, 244, 0.7);
+  color: #efefef;
 }
 
 .startup-name {

@@ -66,7 +66,7 @@ $(function(){
 
 stva.resize_sidebar = function(){
 
-	$(".list-wrap").height($(window).height() - $('.header').height());
+	$(".list-wrap").height($(window).height() - $('.masthead').height());
 
 };
 
@@ -88,6 +88,10 @@ stva.init = function(){
 
 	$(window).bind('resize',function(event) {
 		stva.resize_sidebar();
+	});
+
+	$.getJSON("http://backend.startvirginia.com:8080/apis/json/companies/", function(data){
+		console.log(data);
 	});
 
 };
