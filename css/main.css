@@ -18,6 +18,7 @@ input,
 select,
 textarea {
   color: #222;
+  font-family: "proxima-nova";
 }
 
 body {
@@ -98,16 +99,20 @@ textarea {
   border-left: 1px solid #ccc;
 }
 #panel h1 {
-  color: #fff;
+  color: #f7f7f7;
   background: #222;
   margin: 0;
-  padding: 7px 15px;
+  padding: 8px 15px;
   font-size: 21px;
+  font-family: "proxima-nova";
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .startup-name {
-  font-size: 15px;
-  margin: 0;
+  font-size: 18px;
+  margin: 0 0 3px;
 }
 
 .url {
@@ -122,27 +127,33 @@ textarea {
   list-style: none;
 }
 .list li {
-  padding: 15px 15px;
   border-bottom: 1px solid rgba(33, 33, 33, 0.2);
   border-top: 1px solid rgba(244, 244, 244, 0.8);
   overflow: auto;
 }
 .list h3 {
-  margin: 4px 0;
-  font-size: 16px;
+  margin: 3px 0;
+  font-size: 18px;
 }
 .list p {
   margin: 0;
   font-style: 12px;
-  color: #777;
+  color: #888;
 }
 .list a {
   color: inherit;
   text-decoration: none;
+  display: block;
+  padding: 15px 15px;
+  background: #F7F7F7;
+}
+.list a:hover {
+  background: #fff;
 }
 .list .logo {
   float: left;
   margin-right: 15px;
+  border-radius: 5px;
 }
 
 .list-wrap {
@@ -154,8 +165,10 @@ textarea {
   padding: 7px 15px;
   border-bottom: 1px solid rgba(33, 33, 33, 0.2);
   border-top: 1px solid rgba(244, 244, 244, 0.8);
-  font-size: 15px;
+  font-size: 13px;
+  letter-spacing: 1px;
   text-align: center;
+  text-transform: uppercase;
 }
 .filter a {
   font-weight: bold;
