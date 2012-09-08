@@ -73,7 +73,7 @@ stva.resize_sidebar = function(){
 
 stva.init = function(){
 
-	$('#map_canvas').gmap({'center': '37.5536117554, -77.4605636597', 'styles': mapStyles, 'zoom': 11, 'disableDefaultUI':true, 'callback': function() {
+	$('#map_canvas').gmap({'center': '37.5536117554, -77.4605636597', 'styles': mapStyles, 'zoom': 11, 'streetViewControl':false,'mapTypeControl':false, 'callback': function() {
 		var self = this;
 		self.addMarker({'position': this.get('map').getCenter(), 'icon': "http://localhost:8000/img/marker.png" }).click(function() {
 			self.openInfoWindow({ 'content': '<h3 class="startup-name">Startup Name</h3><a class="url" href="#">www.domain.com</a>' }, this);
