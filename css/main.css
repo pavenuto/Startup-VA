@@ -137,6 +137,7 @@ textarea {
   clear: both;
   margin-top: 6px;
   font-size: 18px;
+  margin-bottom: 9px;
   color: #b7b7b7;
 }
 #panel .add {
@@ -153,26 +154,29 @@ textarea {
 }
 #panel .add-dropdown {
   float: right;
+  margin-top: 7px;
   position: relative;
   z-index: 3;
 }
 #panel .add-dropdown .add-button {
   color: #fff;
   color: #f4f4f4;
-  padding: 11px 16px;
+  padding: 11px 0px 11px 39px;
   text-decoration: none;
+  border-top: 1px solid #595959;
   font-weight: bold;
   font-size: 15px;
-  background: #3a3a3a;
+  background: #3a3a3a url("../img/add-button.png") no-repeat 9% 50%;
   width: 120px;
   display: block;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
 }
 #panel .add-dropdown ul {
   display: none;
   background: #3a3a3a;
   position: absolute;
   z-index: 4;
-  width: 120px;
+  width: 127px;
   margin: -12px 0 0;
   padding: 5px 16px 8px;
   list-style: none;
@@ -225,6 +229,7 @@ textarea {
   margin: 0;
   padding: 0;
   list-style: none;
+  box-shadow: 0 4px 2px #ccc;
 }
 .list .hidden {
   display: none;
@@ -424,7 +429,7 @@ textarea {
 }
 
 #logo {
-  margin-top: 2px;
+  margin-top: 7px;
   margin-bottom: 7px;
 }
 

@@ -75,6 +75,8 @@ stva.resize_sidebar = function(){
 
   $(".list-wrap").height($(window).height() - ($('.masthead').height()+$(".tabs").height()));
 
+  $("#map_canvas").gmap('refresh');
+
 };
 
 stva.sidebar_tabs = function(){
@@ -113,6 +115,29 @@ stva.sidebar_tabs = function(){
 };
 
 
+stva.add_dropdown = function(){
+
+    $(".add-button").click(function(e){
+      e.preventDefault();
+    });
+
+    $('.add-dropdown ').hover(function() {
+      $(this).find('ul').show();
+    }, function() {
+       $(this).find('ul').hide();
+    });
+
+};
+
+stva.external_links = function(){
+
+    /* All external links should be new windows */
+    $("a.url").live("click",function(e){
+        $(this).attr('target', '_blank');
+    });
+
+};
+
 stva.init = function(){
     
   var $map = $("#map_canvas"),
@@ -127,25 +152,22 @@ stva.init = function(){
 
   stva.sidebar_tabs();
 
+  stva.add_dropdown();
+  stva.external_links();
+
 
   $.getJSON("http://backend.startvirginia.com/apis/json/companies/", function(data){
-      
-    var html = "";
     
     $.each(data, function(i, startup) {
 
-      if (startup.fields.hiring) {
+      view = {
+        id: startup.pk,
+        name: startup.fields.name,
+        hiring: startup.fields.hiring
+      };
 
-        hiring_value = "<p class='hiring-flag'>Hiring</p>";
-
-      } else {
-
-        hiring_value = "";
-
-      }
-            
-      html += "<li id='startup_"+startup.pk+"' data-type='startup'><a href='#'><h3>"+startup.fields.name+"</h3>"+hiring_value+"</a></li>";
-            
+      st = ich.startup(view);
+        
       $map.gmap('addMarker', {
         'position': new google.maps.LatLng(startup.fields.latitude, startup.fields.longitude),
         'bounds': true,
@@ -164,9 +186,11 @@ stva.init = function(){
         $map.gmap('openInfoWindow', { 'content': '<h3 class="startup-name">'+startup.fields.name+'</h3><a target="_blank" class="url" href="'+startup.fields.url+'">'+startup.fields.url+'</a><p class="description">'+startup.fields.description+"</p><p class='hiring'>"+startup.fields.hiring+"<p class='industry'>"+startup.fields.industry+"</p><p class='address'>"+startup.fields.street1+" "+startup.fields.street2+"<br> "+startup.fields.city+", "+startup.fields.state+"</p>"}, this);
       });
 
+      $list.append(st);
+
+
     });
 
-    $list.append(html);
 
     var size =$list.find("li[data-type='startup']").size();
 
@@ -178,12 +202,15 @@ stva.init = function(){
     $.getJSON("http://backend.startvirginia.com/apis/json/resources/", function(data){
           
         
-        var html = "";
-        
         $.each(data, function(i, startup) {
+
+          view = {
+            id: startup.pk,
+            name: startup.fields.name
+          };
                 
-          html += "<li id='support_"+startup.pk+"' style='display: none' data-type='support'><a href='#'><h3>"+startup.fields.name+"</h3><p>"+startup.fields.description+"</p></a></li>";
-            
+          rs = ich.resource(view);
+
           var item = $("a", {
               className: 'support',
               href: "#",
@@ -214,25 +241,36 @@ stva.init = function(){
             $map.gmap('openInfoWindow', { 'content': '<h3 class="startup-name">'+startup.fields.name+'</h3><a target="_blank" class="url" href="'+startup.fields.url+'">'+startup.fields.url+'</a><p class="description">'+startup.fields.description+"</p><p class='hiring'>"+startup.fields.hiring+"</p><p class='address'>"+startup.fields.street1+" "+startup.fields.street2+"<br> "+startup.fields.city+", "+startup.fields.state+"</p>" }, this);
           });
 
+
+          $list.append(rs);
+
+
         });
 
-        $list.append(html);
-
-        var size =$list.find("li[data-type='support']").size();
+        var size = $list.find("li[data-type='support']").size();
 
         $('.support').append("<span>"+size+"</span>");
     
     });
 
 
+
+
   $.getJSON("http://backend.startvirginia.com/apis/json/events/", function(data){
 
-        var html = "";
         
         $.each(data, function(i, startup) {
-                
-          html += "<li id='event_"+startup.pk+"' style='display: none' data-type='events'><a href='#'><p class='when'>"+Date.parse(startup.fields.when).toString("M/d")+"</p><h3>"+startup.fields.name+"</h3></a></li>";
+
+          view = {
+            id: startup.pk,
+            name: startup.fields.name,
+            when: Date.parse(startup.fields.when).toString("M/d")
+          };
             
+          ev = ich.event(view);
+
+          console.log(ev);
+
           var item = $("a", {
               className: 'support',
               href: "#",
@@ -263,29 +301,15 @@ stva.init = function(){
             $map.gmap('openInfoWindow', { 'content': '<h3 class="startup-name">'+startup.fields.name+'</h3><p class="when">'+startup.fields.when+'</p><a target="_blank" class="url" href="'+startup.fields.url+'">'+startup.fields.url+'</a><p class="description">'+startup.fields.description+"</p><p class='industry'>"+startup.fields.industry+"</p><p class='address'>"+startup.fields.street1+" "+startup.fields.street2+"<br> "+startup.fields.city+", "+startup.fields.state+"</p>" }, this);
           });
 
-        });
+          $list.append(ev);
 
-        $list.append(html);
+
+        });
 
         var size =$list.find("li[data-type='events']").size();
 
         $('.events').append("<span>"+size+"</span>");
     
     });
-
-
-    $("[data-type='support']").hide();
-
-    /* All external links should be new windows */
-    $("a.url").live("click",function(e){
-        $(this).attr('target', '_blank');
-    });
-
-    $('.add-dropdown ').hover(function() {
-      $(this).find('ul').show();
-    }, function() {
-       $(this).find('ul').hide();
-    });
-
 
 };
