@@ -6,8 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Start VA</title>
-    <meta name="description" content="">
+    <title>StartVirginia - Your definitive source to the startup community in Virginia.</title>
+    <meta name="description" content="StartVirginia is a crowd-sourced community resource that puts Virginia startups, funding sources and upcoming events on the map.">
     <meta name="viewport" content="width=1200px">
 
     <link rel="stylesheet" href="css/normalize.css">
@@ -51,6 +51,24 @@
 
     </div>
 
+
+    <div id="social">
+        <ul>
+            <li><div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script></li>
+        </ul>
+        <ul>
+            <li><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.startva.com/" data-related="@startvirginia" data-lang="en">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
+        </ul>
+    </div>
+
     <script id="startup" type="text/html">
       <li id="startup_{{ id }}" data-type='startup'>
         <a href='#'>
@@ -78,8 +96,6 @@
             </a>
         </li>
     </script>
-
-
 
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-tujivib31yNxRvkYOGbrb9T43Sc0Qk0&sensor=true"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>

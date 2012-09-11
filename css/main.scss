@@ -125,6 +125,19 @@ textarea {
 
 }
 
+#social {
+    position: absolute;
+    background:#efefef;
+    bottom: 10px;
+    left: 10px;
+    z-index: 10;
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+}
+
 #panel {
     width: 30%;
     height: 100%;
@@ -295,7 +308,7 @@ textarea {
         background: #64b15c;
         color: #fff;
         padding: 5px;
-        margin-right: 11px;
+        margin-right: 14px;
         width: 50px;
         text-align: center;
         font-weight: 600;
@@ -368,6 +381,9 @@ textarea {
             color: #333;
             background: #f7f7f7;
             border-bottom: 1px solid #f7f7f7;
+            span {
+                background: #666;
+            }
         }
         &:hover {
             background: #f4f4f4;

@@ -1,5 +1,7 @@
 var stva = {};
 
+
+
 var mapStyles = [
  {
     featureType: "road",
@@ -57,6 +59,8 @@ var mapStyles = [
     ]
   }
 ];
+
+var mapDefaults = {'center': '37.5536117554, -77.4605636597', 'styles': mapStyles, 'zoom': 11, 'streetViewControl':false,'mapTypeControl':false};
 
 $(function(){
 
@@ -143,15 +147,13 @@ stva.init = function(){
   var $map = $("#map_canvas"),
       $list = $('.list');
 
-  $map.gmap({'center': '37.5536117554, -77.4605636597', 'styles': mapStyles, 'zoom': 11, 'streetViewControl':false,'mapTypeControl':false});
+  $map.gmap(mapDefaults);
 
   stva.resize_sidebar();
-
   $(window).bind('resize',stva.resize_sidebar);
+  
   stva.add_company_modal();
-
   stva.sidebar_tabs();
-
   stva.add_dropdown();
   stva.external_links();
 
@@ -166,12 +168,25 @@ stva.init = function(){
         hiring: startup.fields.hiring
       };
 
+      info = {
+        when: startup.fields.when,
+        name: startup.fields.name,
+        url: startup.fields.url,
+        description: startup.fields.description,
+        industry: startup.fields.industry,
+        street1: startup.fields.street1,
+        street2: startup.fields.street2,
+        city: startup.fields.city,
+        state: startup.fields.state
+      };
+
       st = ich.startup(view);
+      //startup_content = ich.infowindow(info);
         
       $map.gmap('addMarker', {
         'position': new google.maps.LatLng(startup.fields.latitude, startup.fields.longitude),
         'bounds': true,
-        'icon': "http://startvirginia.com/img/startup-marker.png"},
+        'icon': "http://startvirginia.com/img/startup-marker.png" },
         function(map,marker){
 
             $("#startup_"+startup.pk).live("click", function(e){
@@ -210,16 +225,6 @@ stva.init = function(){
           };
                 
           rs = ich.resource(view);
-
-          var item = $("a", {
-              className: 'support',
-              href: "#",
-              text: "<h3>"+startup.fields.name+"</h3><p>"+startup.fields.description+"</p>",
-              click: function(e){
-                    e.preventDefault();
-                    $map.gmap('openInfoWindow', { 'content': '<h3 class="startup-name">'+startup.fields.name+'</h3><a target="_blank" class="url" href="'+startup.fields.url+'">'+startup.fields.url+'</a><p class="description">'+startup.fields.description+"</p><p class='hiring'>"+startup.fields.hiring+"<p class='address'>"+startup.fields.street1+" "+startup.fields.street2+"<br> "+startup.fields.city+", "+startup.fields.state+"</p>" }, this);
-              }
-          });
 
 
           $map.gmap('addMarker', {
@@ -269,17 +274,6 @@ stva.init = function(){
             
           ev = ich.event(view);
 
-          console.log(ev);
-
-          var item = $("a", {
-              className: 'support',
-              href: "#",
-              text: "<h3>"+startup.fields.name+"</h3><p>"+startup.fields.description+"</p>",
-              click: function(e){
-                    e.preventDefault();
-                    $map.gmap('openInfoWindow', { 'content': '<p class="when">'+Date.parse(startup.fields.when).toString("M/d")+'</p><h3 class="startup-name">'+startup.fields.name+'</h3><a target="_blank" class="url" href="'+startup.fields.url+'">'+startup.fields.url+'</a><p class="description">'+startup.fields.description+"</p><p class='address'>"+startup.fields.street1+" "+startup.fields.street2+"<br> "+startup.fields.city+", "+startup.fields.state+"</p>" }, this);
-              }
-          });
 
 
           $map.gmap('addMarker', {
@@ -298,7 +292,7 @@ stva.init = function(){
             });
 
           }).click(function() {
-            $map.gmap('openInfoWindow', { 'content': '<h3 class="startup-name">'+startup.fields.name+'</h3><p class="when">'+startup.fields.when+'</p><a target="_blank" class="url" href="'+startup.fields.url+'">'+startup.fields.url+'</a><p class="description">'+startup.fields.description+"</p><p class='industry'>"+startup.fields.industry+"</p><p class='address'>"+startup.fields.street1+" "+startup.fields.street2+"<br> "+startup.fields.city+", "+startup.fields.state+"</p>" }, this);
+            $map.gmap('openInfoWindow', { 'content': '<p class="when">'+Date.parse(startup.fields.when).toString("M/d")+'</p><h3 class="startup-name">'+startup.fields.name+'</h3><a target="_blank" class="url" href="'+startup.fields.url+'">'+startup.fields.url+'</a><p class="description">'+startup.fields.description+"</p><p class='address'>"+startup.fields.street1+" "+startup.fields.street2+"<br> "+startup.fields.city+", "+startup.fields.state+"</p>" }, this);
           });
 
           $list.append(ev);
